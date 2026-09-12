@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  
+/* --color-white: #FFFFFF;
+--color-lightgrey: #CDC9C9; */
+
+
+  /* Spacing, used for margins, paddings and gaps */
+  /* --spacing-2: 0.125rem;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-48: 3rem; */
+
+  /* Border radius, used for rounding corners */
+/* 
+  --radius-small: 0.5rem;
+  --radius-medium: 1rem;
+  --radius-large: 1.5rem;
+  --radius-pill: 999px; */
+
+  /* Border widths, used for borders and outlines */
+  /* --border-width-thin: 1px;
+  --border-width-medium: 3px;
+  --border-width-thick: 5px;
+  --border-width-extra-thick: 8px; */
+
+  /* Box shadows, used for overlaying elements */
+  /* --box-shadow: 0 0 8.1px 0 rgba(0, 0, 0, 0.18); */
+
+  @media (max-width: 1024px) {
+    
+  }
+}
+
