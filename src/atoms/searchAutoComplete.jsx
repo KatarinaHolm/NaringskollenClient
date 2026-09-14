@@ -11,10 +11,12 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
   return (
     <div className="relative w-full max-w-lg">
       <label className="input w-full">
+        <span className="sr-only">Sök livsmedel</span>
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <g
             strokeLinejoin="round"
