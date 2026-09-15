@@ -4,6 +4,7 @@ import Footer from './components/footer';
 import AdminPage from './pages/adminPage';
 import HomePage from './pages/homePage';
 import LoginPage from './pages/loginPage';
+import { FoodProvider } from './context/FoodContext';
 
 function App() {
 
@@ -11,11 +12,13 @@ function App() {
   return (
     <>
     <Header />
-    <Routes>
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/' element={<HomePage />} />
-      <Route path='/admin' element={<AdminPage />}/> {/* Protected route */}
-    </Routes>
+    <FoodProvider>
+      <Routes>
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/admin' element={<AdminPage />}/> {/* Protected route */}
+      </Routes>    
+    </FoodProvider>
     <Footer />
     </>
   )

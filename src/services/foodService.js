@@ -6,7 +6,7 @@ const api = axios.create({
 })
 
 //Rename to Search in frontend and backend
-export const getAllFood = async (query) => {
+export const search = async (query) => {
     const response = await api.get(`food${encodeURIComponent(query)}`);
     return response.data;
 };
@@ -25,7 +25,7 @@ export const getCalculatedNutrition = async (id, quantity, unit) => {
     return response.data
 }
 
-export const createMovie = async (food) => {
+export const createFood = async (food) => {
     const response = await api.post(food);
     return response.data;
 }
