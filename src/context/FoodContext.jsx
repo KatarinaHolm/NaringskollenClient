@@ -1,26 +1,25 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useCallback } from "react";
 import { search } from "../services/foodService";
 
 export const FoodContext = createContext();
 
-export function FoodProvider({children}){    
-    const [searchList, setSearchList] = useState([]);
+export function FoodProvider({children}){       
     const [chosenFood, setChosenFood] = useState({});
     const [chosenFoodData, setChosenFoodData] = useState({});    
 
-    async function getSearchList(query){
+    const getSearchList = useCallback( async (query) => {
         try{
-            const foodResults = await search(query);
-            setSearchList(foodResults);
-            console.log(foodResults);
+            const foodResults = await search(query);            
+            return foodResults;            
         }
         catch(error){
             console.log("Error fetching food suggestions: ", error);
+            return [];
         }
-    }
+    }, []);
 
     return(
-        <FoodContext.Provider value={{setChosenFoodData, searchList, getSearchList, chosenFood, setChosenFood, chosenFoodData}} >
+        <FoodContext.Provider value={{setChosenFoodData, getSearchList, chosenFood, setChosenFood, chosenFoodData}} >
             {children}
         </FoodContext.Provider>
     )

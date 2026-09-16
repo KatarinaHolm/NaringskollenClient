@@ -1,19 +1,20 @@
-import { useState, useEffect, useContext } from "react";
-import { FoodContext } from "../context/FoodContext";
+import { useState } from "react";
+import { useFoodSelect } from "../hooks/useFoodSelect";
 import SearchSelect from "../atoms/searchAutoComplete";
 import QuantityInput from "../atoms/input";
 import SelectUnit from "../atoms/select";
-import { getCalculatedNutrition, search } from "../services/foodService";
+import { getCalculatedNutrition } from "../services/foodService";
+
 
 export default function SearchFieldUser() {
+//States and objects
   // SearchSelect
-  const { getSearchList, searchList } = useContext(FoodContext);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [selectedFood, setSelectedFood] = useState({
     id: null,
     units: [],
   });
+  const { searchResults, setSearchResults } = useFoodSelect(searchQuery);
 
   // QuantityInput
   const [quantityValue, setQuantityValue] = useState();
@@ -26,23 +27,9 @@ export default function SearchFieldUser() {
   const [selectUnitOptions, setSelectUnitOptions] = useState(baseUnitOptions);
   const [unitValue, setUnitValue] = useState();
 
+
+//Functions
   //For SearchSelect (search field with autocomplete options)
-  useEffect(() => {
-    if (searchQuery === "") {
-      setSearchResults([]);
-      return;
-    }
-
-    const debounceDelay = setTimeout(async () => {
-      await getSearchList(searchQuery);
-      setSearchResults(SearchList);
-
-      return () => clearTimeout;
-    }, 300);
-
-    return () => clearTimeout(debounceDelay);
-  }, [searchQuery]);
-
   function onFoodSelect(food) {
     setSelectedFood({
       id: food.id,
@@ -50,13 +37,11 @@ export default function SearchFieldUser() {
     });
 
     setSearchQuery(food.name);
-
     setSearchResults([]);
-
-    updateUnitOptions(units);
+    updateUnitOptions(selectedFood.units);
   }
 
-  // Method for quantity input?!!
+  // Function for quantity input?!!
 
   // Updating UnitOptions if food has unit conversions saved in database
   function updateUnitOptions(units) {
@@ -90,9 +75,16 @@ export default function SearchFieldUser() {
 
   return (
     <>
-      <SearchSelect />
+    //form
+      <SearchSelect
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        results={searchResults}
+        onSelect={onFoodSelect}
+      />
       <QuantityInput />
       <SelectUnit />
+      //button submit
     </>
   );
 }
