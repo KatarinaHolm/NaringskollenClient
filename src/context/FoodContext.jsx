@@ -3,9 +3,9 @@ import { search } from "../services/foodService";
 
 export const FoodContext = createContext();
 
-export function FoodProvider({children}){       
-    const [chosenFood, setChosenFood] = useState({});
-    const [chosenFoodData, setChosenFoodData] = useState({});    
+export function FoodProvider({children}){      
+    const [calculatedNutritionData, setCalculatedNutritionData] = useState({});    
+    const [foodReferenceData, setFoodReferenceData] = useState();
 
     const getSearchList = useCallback( async (query) => {
         try{
@@ -19,7 +19,7 @@ export function FoodProvider({children}){
     }, []);
 
     return(
-        <FoodContext.Provider value={{setChosenFoodData, getSearchList, chosenFood, setChosenFood, chosenFoodData}} >
+        <FoodContext.Provider value={{ getSearchList, calculatedNutritionData, setCalculatedNutritionData, foodReferenceData, setFoodReferenceData }} >
             {children}
         </FoodContext.Provider>
     )

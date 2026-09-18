@@ -7,12 +7,13 @@ const api = axios.create({
 
 //Rename to Search in frontend and backend
 export const search = async (query) => {
-    const response = await api.get(`food${encodeURIComponent(query)}`);
+    const response = await api.get(`food?query=${encodeURIComponent(query)}`);
     return response.data;
 };
 
 export const getById = async (id) => {
     const response = await api.get(`food/${id}`);
+    console.log(response.data);
     return response.data;
 }
 
@@ -21,8 +22,10 @@ export const getCalculatedNutrition = async (id, quantity, unit) => {
         quantity : quantity,
         unit: unit
     })
-    const response = await api.get(`food/${id}/calculate${params.toString()}`);
-    return response.data
+    const response = await api.get(`food/${id}/calculate?${params.toString()}`);
+
+    console.log(response.data);
+    return response.data;
 }
 
 export const createFood = async (food) => {

@@ -1,11 +1,11 @@
-
+import SearchFieldAdmin from "../components/searchFieldAdmin"
 
 export default function AdminPage(){
 
     return(
         <>
-        <h1>Inloggad admin</h1>
-        <p>under utveckling</p>
+        <h2>Inloggad admin</h2>
+        <SearchFieldAdmin />
         </>
     )
 }

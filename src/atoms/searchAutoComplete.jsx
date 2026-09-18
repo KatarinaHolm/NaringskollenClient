@@ -47,8 +47,8 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
             {results.map((foodItem) => (
                 <li key={foodItem.id}>
                     <button 
-                    className="grid grid-cols-12 items-center w-full gap-2 text-left"
-                    onClick={onSelect}
+                    className="grid grid-cols-12 items-center w-full gap-2 text-left"                  
+                    onClick={() => onSelect(foodItem)}
                     >
                       <span className="col-span-7 truncate">{foodItem.name}</span>
                       <span className="text-xs text-base-content/50  col-span-5 text-right truncate">{foodItem.category}</span>                      

@@ -12,14 +12,23 @@ export function useFoodSelect(searchQuery){
             return;
         }
 
+        let isCurrent = true;
+
         const debounceDelay = setTimeout(async () => {
-        const results = await getSearchList(searchQuery);
-        setSearchResults(results);       
+            const results = await getSearchList(searchQuery);
+
+            if(isCurrent){
+                setSearchResults(results);
+        
+            }
 
         }, 300);
 
-        return () => clearTimeout(debounceDelay);
-    }, [searchQuery, getSearchList]); //Förstå problemet, lägga till dependencies
+        return () => {
+            isCurrent = false;
+            clearTimeout(debounceDelay);
+        };
+    }, [searchQuery, getSearchList]);
 
     return {searchResults, setSearchResults}
 }
