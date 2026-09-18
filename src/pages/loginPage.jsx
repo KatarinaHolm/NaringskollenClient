@@ -3,7 +3,7 @@ export default function LoginPage(){
 
     return(
         <>
-        <h1>Inloggningssida</h1>
+        <h2>Inloggningssida</h2>
         <p>under utveckling</p>
         </>
     )

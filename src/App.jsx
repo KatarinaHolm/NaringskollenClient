@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/' element={<HomePage />} />
-        <Route path='/admin' element={<AdminPage />}/> {/* Protected route */}
+        <Route path='/admin' element={<AdminPage />}/> {/* !!!!! add to - Protected route */}
       </Routes>    
     </FoodProvider>
     <Footer />
