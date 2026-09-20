@@ -5,18 +5,20 @@ import ButtonPrimary from "../atoms/buttonPrimary";
 import { getById } from "../services/foodService";
 import { FoodContext } from "../context/FoodContext";
 
-export default function SearchFieldAdmin() {
+export default function SearchFieldAdmin({onSearchSucess}) {
   //States and objects
   // SearchSelect
   const [searchQuery, setSearchQuery] = useState("");
+  const [shouldSearch, setShouldSearch] = useState(true);
   const [selectedFood, setSelectedFood] = useState(null);
-  const { searchResults, setSearchResults } = useFoodSelect(searchQuery);
+  const { searchResults, setSearchResults } = useFoodSelect(searchQuery, shouldSearch);
   const { setFoodReferenceData } = useContext(FoodContext);
 
   //Functions
   //For SearchSelect (search field with autocomplete options)
   function onFoodSelect(food) {
-    setSelectedFood(food.id);    
+    setShouldSearch(false);
+    setSelectedFood(food.id); 
     setSearchQuery(food.name);
     
     setSearchResults([]);
@@ -28,7 +30,8 @@ export default function SearchFieldAdmin() {
     try {
       const results = await getById(selectedFood);
       setFoodReferenceData(results);
-
+      setSearchQuery("");
+      onSearchSucess();
     } catch (error) {
       console.log("Error fetching nutrition data:", error);
     }
@@ -38,7 +41,10 @@ export default function SearchFieldAdmin() {
     <form onSubmit={handleSubmit} >
       <SearchSelect
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+            setShouldSearch(true);
+            setSearchQuery(e.target.value)
+        }}
         results={searchResults}
         onSelect={onFoodSelect}
       />

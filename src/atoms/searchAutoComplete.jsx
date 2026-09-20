@@ -4,9 +4,10 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
     const [isFocused, setIsFocused] = useState(false);
 
     function handleBlur(){
-        setTimeout(() => setIsFocused(false), 150);
-        
+        setTimeout(() => setIsFocused(false), 300);        
     }
+
+    // Add if no match found
 
   return (
     <div className="relative w-full max-w-lg">
@@ -31,6 +32,7 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
         </svg>
         <input 
          type="search" 
+         name="searchAutoComplete"
          className="grow" 
          placeholder="Sök livsmedel"
          required
@@ -43,9 +45,9 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
 
       {isFocused && results.length > 0 &&(
         <div className="absolute z-50 left-0 right-0 w-auto bg-base-100 shadow rounded-box mt-1 border border-base-300 max-h-60 overflow-y-auto overflow-x-hidden">
-        <ul className="menu bg-transparant p-1">
+        <ul className="menu bg-transparant p-1 w-full">
             {results.map((foodItem) => (
-                <li key={foodItem.id}>
+                <li key={foodItem.id} className="w-full">
                     <button 
                     className="grid grid-cols-12 items-center w-full gap-2 text-left"                  
                     onClick={() => onSelect(foodItem)}
