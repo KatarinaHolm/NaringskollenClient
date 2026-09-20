@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from "react";
 import { FoodContext } from "../context/FoodContext";
 
 
-export function useFoodSelect(searchQuery){
+export function useFoodSelect(searchQuery, shouldSearch = true){
     const { getSearchList } = useContext(FoodContext);
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
-        if (searchQuery === "") {
+        if (!shouldSearch || searchQuery === "") {
             setSearchResults([]);
             return;
         }
@@ -22,13 +22,13 @@ export function useFoodSelect(searchQuery){
         
             }
 
-        }, 300);
+        }, 400);
 
         return () => {
             isCurrent = false;
             clearTimeout(debounceDelay);
         };
-    }, [searchQuery, getSearchList]);
+    }, [searchQuery, shouldSearch, getSearchList]);
 
     return {searchResults, setSearchResults}
 }
