@@ -1,4 +1,5 @@
 import {Routes, Route} from 'react-router';
+import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/header';
 import Footer from './components/footer';
 import AdminPage from './pages/adminPage';
@@ -16,7 +17,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/' element={<HomePage />} />
-        <Route path='/admin' element={<AdminPage />}/> {/* !!!!! add to - Protected route */}
+        <Route path='/admin' element={<ProtectedRoute><AdminPage /></ProtectedRoute>}/>
       </Routes>    
     </FoodProvider>
     <Footer />
