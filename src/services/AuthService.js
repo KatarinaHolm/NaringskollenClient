@@ -19,3 +19,12 @@ export async function checkAuthentication(){
         }
     }
 }
+
+export async function logout() {
+    try{
+        await api.post("logout", JSON.stringify({}) );
+    }
+    catch(error){
+        console.error("Kunde inte nå servern, men loggar ut lokalt ändå:", error);
+    }
+}
