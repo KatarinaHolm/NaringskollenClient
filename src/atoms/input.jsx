@@ -1,19 +1,19 @@
 import { useInputValidation } from "../hooks/useInputValidation"
 
-export default function Input({id, type, placeholder, value, onChange, name, required, disabled, disabledInfoText}){
+export default function Input({type, placeholder, value, onChange, name, required, disabled=false, disabledInfoText}){
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(
    <>
-   <label htmlFor={id} className="input">
+   <label htmlFor={name} className="input">
     <span className="sr-only">{placeholder}</span>
     {required && <span className="required">*</span>}
     <input 
     className="grow" 
-    id={id} 
+    id={name} 
     type={type} 
     placeholder={placeholder} 
-    value={value} 
+    value={value}
     onChange={onChange} 
     name={name} 
     required={required} 
