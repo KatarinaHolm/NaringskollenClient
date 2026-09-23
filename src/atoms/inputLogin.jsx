@@ -1,6 +1,6 @@
 import { useInputValidation } from "../hooks/useInputValidation"
 
-export default function Input({type, placeholder, value, onChange, name, required, disabled=false, disabledInfoText}){
+export default function InputLogin({type, placeholder, value, onChange, name, required, disabled=false, disabledInfoText}){
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(

@@ -1,13 +1,13 @@
+import ButtonBack from "./buttonBack";
 
-export default function Card({children, onCloseClick}) {
+export default function Card({ children, onCloseClick, onBackClick }) {
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <div className="card-body">
-        <div className="card-actions justify-end">
-          <button 
-          className="btn btn-square btn-sm"
-          onClick={onCloseClick}
-          >
+        <div className="card-actions justify-between">
+          {onBackClick && <ButtonBack onBackClick={onBackClick} />}
+
+          <button className="btn btn-square btn-sm" onClick={onCloseClick}>
             <svg
               aria-label="Close"
               xmlns="http://www.w3.org/2000/svg"
