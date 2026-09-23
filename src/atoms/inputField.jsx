@@ -1,15 +1,17 @@
 import { useInputValidation } from "../hooks/useInputValidation"
 
-export default function Input({type, placeholder, value, onChange, name, required, disabled=false, disabledInfoText}){
+export default function InputField({label, type, placeholder, value, onChange, name, required, disabled=false}){
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(
-   <>
-   <label htmlFor={name} className="input">
-    <span className="sr-only">{placeholder}</span>
-    {required && <span className="required">*</span>}
+   <fieldset className="fieldset">
+   <label htmlFor={name} className="label">
+    {label}
+    {required && <span className="required"> *</span>}
+    </label>    
+    
     <input 
-    className="grow" 
+    className="input" 
     id={name} 
     type={type} 
     placeholder={placeholder} 
@@ -21,16 +23,15 @@ export default function Input({type, placeholder, value, onChange, name, require
     onFocus={handleFocus}
     onBlur={handleBlur}   
     onInvalid={handleInvalid}      
-    />
-    </label>
+    />    
 
     <div className="validator-hint hidden">{inputError}</div>   
 
-    {disabled && disabledInfoText && (
+    {disabled  && (
         <div className="fieldset-label text-base-content/70 text-xs mt-1" aria-live="polite">
-            {disabledInfoText}
+            {/* If want disabled text */}
         </div>   
     )}   
-</>
+</fieldset>
   )
 }
