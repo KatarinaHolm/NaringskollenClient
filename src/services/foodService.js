@@ -30,9 +30,19 @@ export const getCalculatedNutrition = async (id, quantity, unit) => {
 
 export const createFood = async (food) => {
     const response = await api.post(food);
-    return response.data;
+    return response.data; // or dont?
 }
 
-//Update, updateMetadata, Delete, GetCategoriesName
+export const updateFood = async (id, food) => {
+    const response = await api.put(`food/${id}`, food);   
+    return response.data; 
+}
+
+export const updateFoodMetadata = async (id, food) => {
+    const response = await api.patch(`food/${id}`, food);   
+    return response.data; 
+}
+
+// Delete, GetCategoriesName
 
 
