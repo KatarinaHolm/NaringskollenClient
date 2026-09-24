@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useFoodSelect } from "../hooks/useFoodSelect";
-import SearchSelect from "../atoms/searchAutoComplete";
-import ButtonPrimary from "../atoms/buttonPrimary";
 import { getById } from "../services/foodService";
 import { FoodContext } from "../context/FoodContext";
+import SearchSelect from "../atoms/searchAutoComplete";
+import ButtonPrimary from "../atoms/buttonPrimary";
 
 export default function SearchFieldAdmin({onSearchSucess}) {
   //States and objects

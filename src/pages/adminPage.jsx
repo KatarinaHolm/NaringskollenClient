@@ -106,6 +106,10 @@ export default function AdminPage() {
     setCardMode("view");
   }
 
+  function handleEditSuccess(){
+    setCardMode("view");
+  };
+
   function handleDeleteClick() {
     // IMPLEMENT!!
   }
@@ -149,6 +153,7 @@ export default function AdminPage() {
               categories={categories} 
               specialUnitOptions={specialUnitOptions}
               foodData={foodReferenceData}
+              onEditSuccess={handleEditSuccess}
             />
           )}
         </Card>

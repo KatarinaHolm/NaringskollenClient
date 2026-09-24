@@ -13,7 +13,8 @@ export default function InputField({label, type, placeholder, value, onChange, n
     <input 
     className="input" 
     id={name} 
-    type={type} 
+    type={type}
+    min="0"
     placeholder={placeholder} 
     value={value}
     onChange={onChange} 
