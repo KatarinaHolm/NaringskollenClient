@@ -29,8 +29,8 @@ export const getCalculatedNutrition = async (id, quantity, unit) => {
 }
 
 export const createFood = async (food) => {
-    const response = await api.post(food);
-    return response.data; // or dont?
+    const response = await api.post('food', food);
+    return response.data;
 }
 
 export const updateFood = async (id, food) => {

@@ -5,11 +5,13 @@ export default function Select({
   value,
   onSelectChange,
   options,
+  required
 }) {
   return (
     <fieldset>
       <label htmlFor="select" className="label">
         {label}
+        {required && <span className="required"> *</span>}
       </label>
       <select
         id="select"
@@ -17,6 +19,7 @@ export default function Select({
         value={value}
         onChange={onSelectChange}
         className="select"
+        required= {required}
       >
         <option value="" disabled hidden>
           {placeholder}

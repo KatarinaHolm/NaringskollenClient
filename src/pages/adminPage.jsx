@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { FoodContext } from "../context/FoodContext";
 import { referenceFields, categories, specialUnitOptions, createFood, createFields, } from "../constants/adminPageData";
 import Card from "../atoms/card";
+import AddFood from "../components/addFood";
 import FoodDataView from "../components/foodDataView";
 import SearchFieldAdmin from "../components/searchFieldAdmin";
 import EditFood from "../components/editFood";
@@ -9,29 +10,33 @@ import ButtonSecondary from "../atoms/buttonSecondary";
 
 export default function AdminPage() {
   // Component states
-  const [cardMode, setCardMode] = useState("view"); // view || edit
-  const [isCardVisible, setIsCardVisible] = useState(false); // true || false
+  const [mode, setMode] = useState("view"); // view || edit || create
+  const [isFoodCardVisible, setIsFoodCardVisible] = useState(false); // true || false
 
   //Food data variables
   const { foodReferenceData } = useContext(FoodContext);  
 
   //Handling card
   function handleSearchSuccess() {
-    setCardMode("view");
-    setIsCardVisible(true);
+    setMode("view");
+    setIsFoodCardVisible(true);
   };
 
-  function onCloseClick() {
-    setIsCardVisible(false);
-  }
+  function onFoodCardCloseClick() {
+    setIsFoodCardVisible(false);
+  };
+
+  function onCreateCardCloseClick(){
+    setMode("view");
+  };
 
   // For Edit mode
   function handleBackClick() {
-    setCardMode("view");
+    setMode("view");
   };
 
   function handleEditSuccess(){
-    setCardMode("view");
+    setMode("view");
   };
  
   function handleDeleteClick() {
@@ -41,12 +46,35 @@ export default function AdminPage() {
   return (
     <>
       <h2>Inloggad admin</h2>
-      <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
+      {mode !== "create" && (
+          <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
+      )}
+
+      {mode !== "create" && !isFoodCardVisible && (
+          <ButtonSecondary 
+            text="Lägg till livsmedel"
+            onClick={() => setMode("create")}
+            type="button"
+            />
+      )}
+
+      {mode === "create" && (
+        <Card onCloseClick={onCreateCardCloseClick}>
+          <AddFood 
+            title="Lägg till nytt livsmedel"
+            subtitle="Näringsvärden per 100 gram"
+            fields={createFields}
+            initialFoodData={createFood}
+            categories={categories} 
+            specialUnitOptions={specialUnitOptions}
+          />
+        </Card>
+      )}
 
       {/* If search is made and results found */}
-      {isCardVisible ? (
-        <Card onCloseClick={onCloseClick} onBackClick={cardMode === "edit" ? handleBackClick : undefined}>
-          {cardMode === "view" && (
+      {isFoodCardVisible && (
+        <Card onCloseClick={onFoodCardCloseClick} onBackClick={mode === "edit" ? handleBackClick : undefined}>
+          {mode === "view" && (
             <>
               <FoodDataView
                 title={foodReferenceData.name}
@@ -62,13 +90,13 @@ export default function AdminPage() {
               />
               <ButtonSecondary
                 text="Redigera"
-                onClick={() => setCardMode("edit")}
+                onClick={() => setMode("edit")}
                 type="button"
               />
             </>
           )}
 
-          {cardMode === "edit" && (
+          {mode === "edit" && (
             <EditFood
               title="Redigera livsmedel - "
               subtitle="Näringsvärden per 100 gram"
@@ -80,7 +108,7 @@ export default function AdminPage() {
             />
           )}
         </Card>
-      ) : null}
+      ) }
     </>
   );
 }
