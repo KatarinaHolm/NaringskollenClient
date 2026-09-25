@@ -47,9 +47,9 @@ export default function SearchFieldUser() {
   function updateUnitOptions(units) {
     const selectOptions = [
       ...baseUnitOptions,
-      ...(units.includes(0) ? [{ value: "st", label: "styck" }] : []),
-      ...(units.includes(1) ? [{ value: "skv", label: "skiva" }] : []),
-      ...(units.includes(2)
+      ...(units.includes("styck") ? [{ value: "styck", label: "styck" }] : []),
+      ...(units.includes("skiva") ? [{ value: "skiva", label: "skiva" }] : []),
+      ...(units.includes("dl")
         ? [
             { value: "dl", label: "dl" },
             { value: "msk", label: "msk" },

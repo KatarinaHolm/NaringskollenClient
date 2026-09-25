@@ -22,16 +22,31 @@ export default function EditFood({
   async function handleSubmit(e) {
     e.preventDefault();
 
+    //Convert foodmeasurement data to number from string, maybe remove
+    const foodMeasurements = currentData.foodMeasurements.map((measurement) => {
+        
+        return {
+            ...measurement,
+            grams: Number(measurement.grams),
+            
+        };
+    });
+
     const updateMetadata = {
       oxalate: currentData.oxalate,
       categoryId: currentData.categoryId,
-      foodMeasurements: currentData.foodMeasurements,
+      foodMeasurements,
     };
+
+    const foodToUpdate = {
+        ...currentData,
+        foodMeasurements,
+    }
 
     try {
       let results = {};
       if (currentData.isSystem) {
-        results = await updateFood(currentData.id, currentData);
+        results = await updateFood(currentData.id, foodToUpdate);
       } else {
         results = await updateFoodMetadata(currentData.id, updateMetadata);
       }
@@ -58,7 +73,7 @@ export default function EditFood({
           onSelectChange={handleChange}
           options={categories}
         />
-         {!foodData.isSystem && (
+         {!currentData.isSystem && (
           <InputField
             name={currentData.externalId}
             label="Livsmedelsnummer hos Livsmedelsverket"

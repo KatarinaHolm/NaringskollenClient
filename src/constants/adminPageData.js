@@ -30,10 +30,19 @@ export const categories = [
 
    //Select Unit Options
 export const specialUnitOptions = [
-    { value: 0, label: "styck" },
-    { value: 1, label: "skiva" },
-    { value: 2, label: "dl" },
+    { value: "styck", label: "styck" },
+    { value: "skiva", label: "skiva" },
+    { value: "dl", label: "dl" },
   ];
+  
+  // Unit Enums in backend:
+  // styck, 
+  // skiva, 
+  // dl, 
+  // g,
+  // kg,
+  // msk,
+  // tsk
 
 //   Create variables
 export const createFood = {
