@@ -15,6 +15,7 @@ export default function InputField({label, type, placeholder, value, onChange, n
     id={name} 
     type={type}
     min="0"
+    step="0.01"
     placeholder={placeholder} 
     value={value}
     onChange={onChange} 

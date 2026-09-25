@@ -8,27 +8,35 @@ export default function FoodDataView({
   return (
     <>
       <h3>{title}</h3>
-      <h4>{subtitle}</h4>
-      {fields.map((field) => {
-        let value = foodData?.[field.key];
-        if (value === null || value === undefined || value.length === 0) return;
+      <p><strong>Kategori:</strong> {foodData.category}</p>
 
-        return !Array.isArray(value) ? (
-          <p key={field.key}>
-            <strong>{field.label}:</strong>
-            {" " + value}
-          </p>
-        ) : (
-          <div key={field.key}>
-            <h4>{field.label}</h4>
+      {!foodData.isSystem && (
+        <p><strong>Livsmedelsnummer hos Livsmedelsverket:</strong> {foodData.externalId}</p>
+      )}
+
+      {foodData.foodMeasurements.length > 0 && (
+         <div>
+            <h4>Måttenheter - vikt per enhet</h4>
             <ul>
-              {value.map((item) => (                
+              {foodData.foodMeasurements.map((item) => (                
                 <li key={item.id}>1 {item.unit}: {item.grams} gram</li>
               ))}
             </ul>
           </div>
-        );
-      })}
+      )}
+      
+      <h4>{subtitle}</h4>
+      {fields.map((field) => {
+        let value = foodData?.[field.key];
+        if (value === null || value === undefined ) return;
+
+        return  (
+          <p key={field.key}>
+            <strong>{field.label}:</strong>
+            {" " + value}
+          </p>
+        )         
+      })}       
     </>
   );
 }

@@ -15,7 +15,7 @@ export default function Footer(){
 
     {!shouldHideLoginButton && (
         <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-            <NavLink to= "/login">
+            <NavLink to= "/admin">
                 Admin
             </NavLink>            
         </nav>

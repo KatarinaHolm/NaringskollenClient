@@ -18,6 +18,10 @@ export function useFoodForm(intialData){
       //FoodMeasurements
       function handleMeasurementChange(index, event) {
         const { name, value } = event.target;
+        let updatedValue = value;
+        if(name === "grams"  && value !== ""){
+            updatedValue = Number(value);
+        }
     
         setCurrentData((prev) => ({
           ...prev,
@@ -26,8 +30,8 @@ export function useFoodForm(intialData){
               measurementIndex === index
                 ? {
                     ...measurement,
-                    [name]: Number(value),
-                  }
+                    [name]: updatedValue,
+                }
                 : measurement,
           ),
         }));
