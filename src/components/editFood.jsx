@@ -49,17 +49,7 @@ export default function EditFood({
         {title}
         {currentData.name}
       </h3>
-      <form onSubmit={handleSubmit}>
-        {!foodData.isSystem && (
-          <InputField
-            name={currentData.externalId}
-            label="Livsmedelsnummer hos Livsmedelsverket"
-            type="number"
-            placeholder="Livsmedelsnummer hos Livsmedelsverket"
-            value={currentData.externalId}
-            disabled="true"
-          />
-        )}
+      <form onSubmit={handleSubmit}>       
         <Select
           label="Kategori"
           placeholder="Kategori"
@@ -68,6 +58,16 @@ export default function EditFood({
           onSelectChange={handleChange}
           options={categories}
         />
+         {!foodData.isSystem && (
+          <InputField
+            name={currentData.externalId}
+            label="Livsmedelsnummer hos Livsmedelsverket"
+            type="number"
+            placeholder="Livsmedelsnummer hos Livsmedelsverket"
+            value={currentData.externalId}
+            disabled
+          />
+        )}
 
         <h4>Måttenheter - vikt per enhet</h4>
         {currentData.foodMeasurements.length > 0 ? (
@@ -121,6 +121,7 @@ export default function EditFood({
 
           return (
             <InputField
+              key={field.key}
               name={field.key}
               label={field.label}
               type={field.type}
