@@ -1,12 +1,14 @@
 import { useState, useContext } from "react";
 import { FoodContext } from "../context/FoodContext";
 import { referenceFields, categories, specialUnitOptions, createFood, createFields, } from "../constants/adminPageData";
+import { deleteFood } from "../services/foodService";
 import Card from "../atoms/card";
 import AddFood from "../components/addFood";
 import FoodDataView from "../components/foodDataView";
 import SearchFieldAdmin from "../components/searchFieldAdmin";
 import EditFood from "../components/editFood";
 import ButtonSecondary from "../atoms/buttonSecondary";
+import Modal from "../atoms/modal";
 
 export default function AdminPage() {
   // Component states
@@ -14,58 +16,64 @@ export default function AdminPage() {
   const [isFoodCardVisible, setIsFoodCardVisible] = useState(false); // true || false
 
   //Food data variables
-  const { foodReferenceData } = useContext(FoodContext);  
+  const { foodReferenceData , setFoodReferenceData } = useContext(FoodContext);
 
   //Handling card
   function handleSearchSuccess() {
     setMode("view");
     setIsFoodCardVisible(true);
-  };
+  }
 
   function onFoodCardCloseClick() {
     setIsFoodCardVisible(false);
-  };
+  }
 
-  function onCreateCardCloseClick(){
+  function onCreateCardCloseClick() {
     setMode("view");
-  };
+  }
 
   // For Edit mode
   function handleBackClick() {
     setMode("view");
-  };
+  }
 
-  function handleEditSuccess(){
+  function handleEditSuccess() {
     setMode("view");
-  };
- 
-  function handleDeleteClick() {
-    // IMPLEMENT!!
-  };  
+  }
+
+  async function handleDeleteClick() {
+    try {
+      await deleteFood(foodReferenceData.id);
+      setFoodReferenceData(undefined);
+      setIsFoodCardVisible(false);
+    } catch (error) {
+      console.log("Error updating nutrition data:", error);
+    }
+  }
 
   return (
     <>
       <h2>Inloggad admin</h2>
       {mode !== "create" && (
-          <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
+        <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
       )}
 
       {mode !== "create" && !isFoodCardVisible && (
-          <ButtonSecondary 
-            text="Lägg till livsmedel"
-            onClick={() => setMode("create")}
-            type="button"
-            />
+        <ButtonSecondary
+          text="Lägg till livsmedel"
+          onClick={() => setMode("create")}
+          type="button"
+        />
       )}
 
       {mode === "create" && (
         <Card onCloseClick={onCreateCardCloseClick}>
-          <AddFood 
+          <AddFood
             title="Lägg till nytt livsmedel"
             subtitle="Näringsvärden per 100 gram"
             fields={createFields}
             initialFoodData={createFood}
-            categories={categories} 
+            categories={categories}
             specialUnitOptions={specialUnitOptions}
           />
         </Card>
@@ -73,7 +81,10 @@ export default function AdminPage() {
 
       {/* If search is made and results found */}
       {isFoodCardVisible && (
-        <Card onCloseClick={onFoodCardCloseClick} onBackClick={mode === "edit" ? handleBackClick : undefined}>
+        <Card
+          onCloseClick={onFoodCardCloseClick}
+          onBackClick={mode === "edit" ? handleBackClick : undefined}
+        >
           {mode === "view" && (
             <>
               <FoodDataView
@@ -83,11 +94,18 @@ export default function AdminPage() {
                 foodData={foodReferenceData}
               />
 
-              <ButtonSecondary
-                text="Ta bort"
-                onClick={handleDeleteClick}
-                type="button"
+              <Modal
+                title={foodReferenceData.isSystem ? "Radera livsmedel?" : "Livsmedel hämtat från Livsmedelsdatabasen"}
+                text={foodReferenceData.isSystem ?
+                    `Vill du radera ${foodReferenceData.name}?`
+                    : `${foodReferenceData.name} går inte att radera.`
+                }
+                openModalButtonText="Radera"
+                showConfirmButton={foodReferenceData.isSystem}
+                confirmButtonText="Radera"
+                handleConfirmButtonClick={handleDeleteClick}
               />
+
               <ButtonSecondary
                 text="Redigera"
                 onClick={() => setMode("edit")}
@@ -101,14 +119,14 @@ export default function AdminPage() {
               title="Redigera livsmedel - "
               subtitle="Näringsvärden per 100 gram"
               fields={referenceFields}
-              categories={categories} 
+              categories={categories}
               specialUnitOptions={specialUnitOptions}
               foodData={foodReferenceData}
               onEditSuccess={handleEditSuccess}
             />
           )}
         </Card>
-      ) }
+      )}
     </>
   );
 }

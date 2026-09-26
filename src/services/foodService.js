@@ -43,6 +43,8 @@ export const updateFoodMetadata = async (id, food) => {
     return response.data; 
 }
 
-// Delete, GetCategoriesName
+export const deleteFood = async (id) => {
+    await api.delete(`food/${id}`);
+}
 
 
