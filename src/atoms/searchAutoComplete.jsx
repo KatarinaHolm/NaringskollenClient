@@ -38,6 +38,7 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
          required
          value ={value}
          onChange={onChange}
+         autocomplete="off" 
          onFocus={() => setIsFocused(true)}
          onBlur={handleBlur}
           />
@@ -48,7 +49,8 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
         <ul className="menu bg-transparant p-1 w-full">
             {results.map((foodItem) => (
                 <li key={foodItem.id} className="w-full">
-                    <button 
+                    <button
+                    type="button"
                     className="grid grid-cols-12 items-center w-full gap-2 text-left"                  
                     onClick={() => onSelect(foodItem)}
                     >

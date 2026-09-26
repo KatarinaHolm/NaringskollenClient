@@ -1,20 +1,37 @@
-import SearchAutoComplete from "../atoms/searchAutoComplete";
+import { useContext, useState } from "react";
+import { FoodContext } from "../context/FoodContext";
+import { referenceFields } from "../constants/referenceData";
+import SearchFieldUser from "../components/searchFieldUser"
+import Card from "../atoms/card";
+import FoodDataView from "../components/foodDataView";
 
 export default function HomePage(){ 
-    const testArray =  [{ id: 1, name: 'Test 1', category:'Grönsaker, potatis & rotfrukter' }, { id: 1, name: 'Test 1', category:'Grönsaker, potatis & rotfrukter' }, { id: 1, name: 'Test 1', category:'Grönsaker, potatis & rotfrukter' }, { id: 1, name: 'Test 1', category:'Grönsaker, potatis & rotfrukter' },{ id: 1, name: 'Test 1', category:'Grönsaker, potatis & rotfrukter' },{ id: 2, name: 'Test 2 bla bla bla bla bla bla bla bla test test test', category:'Grönsaker, potatis & rotfrukter'}, { id: 3, name: 'Kyckling rå med skinn', category:'Kött, fågel & chark' }, { id: 1, name: 'Majonnäs 80 % fett', category: 'Färdiga rätter, såser & snabbmat'}, { id: 1, name: 'Test 1' }, { id: 1, name: 'Test 1', category: 'Färdiga rätter, såser & snabbmat' }, { id: 1, name: 'Test 1', category: 'Färdiga rätter, såser & snabbmat' }, ]
+   const [isFoodCardVisible, setIsFoodCardVisible] = useState(false); // true || false
+   const {calculatedNutritionData} = useContext(FoodContext);
+
+    function handleSearchSuccess(){
+        setIsFoodCardVisible(true);
+    }
+
+    function onFoodCardCloseClick(){
+        setIsFoodCardVisible(false);
+    }
 
     return(
-        <>
-        <SearchAutoComplete 
+        <main>
+        <SearchFieldUser onSearchSucess={handleSearchSuccess}/>
         
-         results = {testArray}
-       
-         />
-        <p>Under utveckling...</p>
-        </>
+        {isFoodCardVisible && (
+            <Card onCloseClick={onFoodCardCloseClick}>                  
+                <FoodDataView
+                title={`${calculatedNutritionData.name} - ${calculatedNutritionData.quantity} ${calculatedNutritionData.unit}`}
+                subtitle={`Näringsvärden för ${calculatedNutritionData.quantity} ${calculatedNutritionData.unit}`}
+                fields={referenceFields}
+                foodData={calculatedNutritionData}
+                />
+            </Card>
+
+        )}
+        </main>
     )
 }
-
-//  value=
-        //  onChange= 
-         //  onSelect=
