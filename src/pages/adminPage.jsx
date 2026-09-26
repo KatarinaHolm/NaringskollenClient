@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { FoodContext } from "../context/FoodContext";
-import { referenceFields, categories, specialUnitOptions, createFood, createFields, } from "../constants/adminPageData";
+import { referenceFields, categories, specialUnitOptions, createFood, createFields, } from "../constants/referenceData";
 import { deleteFood } from "../services/foodService";
 import Card from "../atoms/card";
 import AddFood from "../components/addFood";
@@ -52,7 +52,7 @@ export default function AdminPage() {
   }
 
   return (
-    <>
+    <main>
       <h2>Inloggad admin</h2>
       {mode !== "create" && (
         <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
@@ -127,6 +127,6 @@ export default function AdminPage() {
           )}
         </Card>
       )}
-    </>
+    </main>
   );
 }

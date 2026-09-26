@@ -14,7 +14,7 @@ export default function FoodDataView({
         <p><strong>Livsmedelsnummer hos Livsmedelsverket:</strong> {foodData.externalId}</p>
       )}
 
-      {foodData.foodMeasurements.length > 0 && (
+      {foodData.foodMeasurements && foodData.foodMeasurements.length > 0 && (
          <div>
             <h4>Måttenheter - vikt per enhet</h4>
             <ul>

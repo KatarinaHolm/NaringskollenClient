@@ -8,7 +8,7 @@ export default function Select({
   required
 }) {
   return (
-    <fieldset>
+    <fieldset className="fieldset">
       <label htmlFor="select" className="label">
         {label}
         {required && <span className="required"> *</span>}
