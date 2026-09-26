@@ -22,6 +22,7 @@ export default function InputField({label, type, placeholder, value, onChange, n
     name={name} 
     required={required} 
     disabled={disabled}
+    autocomplete="off" 
     onFocus={handleFocus}
     onBlur={handleBlur}   
     onInvalid={handleInvalid}      

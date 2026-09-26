@@ -5,7 +5,7 @@ import { FoodContext } from "../context/FoodContext";
 import SearchSelect from "../atoms/searchAutoComplete";
 import ButtonPrimary from "../atoms/buttonPrimary";
 
-export default function SearchFieldAdmin({onSearchSucess}) {
+export default function SearchFieldAdmin({ onSearchSucess }) {
   //States and objects
   // SearchSelect
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,9 +18,9 @@ export default function SearchFieldAdmin({onSearchSucess}) {
   //For SearchSelect (search field with autocomplete options)
   function onFoodSelect(food) {
     setShouldSearch(false);
-    setSelectedFood(food.id); 
+    setSelectedFood(food.id);
     setSearchQuery(food.name);
-    
+
     setSearchResults([]);
   }
 
@@ -38,23 +38,18 @@ export default function SearchFieldAdmin({onSearchSucess}) {
   }
   return (
     <>
-    <form onSubmit={handleSubmit} >
-      <SearchSelect
-        value={searchQuery}
-        onChange={(e) => {
+      <form onSubmit={handleSubmit}>
+        <SearchSelect
+          value={searchQuery}
+          onChange={(e) => {
             setShouldSearch(true);
-            setSearchQuery(e.target.value)
-        }}
-        results={searchResults}
-        onSelect={onFoodSelect}
-      />
-      <ButtonPrimary
-      text="Sök livsmedel"      
-      type="submit"
-      disabled={false}
-      />
-      
-    </form>
+            setSearchQuery(e.target.value);
+          }}
+          results={searchResults}
+          onSelect={onFoodSelect}
+        />
+        <ButtonPrimary text="Sök livsmedel" type="submit" disabled={false} />
+      </form>
     </>
   );
 }
