@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router";
-import ButtonSecondary from "../atoms/buttonSecondary";
+import ButtonLogout from "../atoms/buttonLogout";
 import { logout } from "../services/AuthService";
 
 export default function Header( ){
   const navigate = useNavigate();
   const location = useLocation();
-  const hideAdminBanner = ["/login", "/"];
-  const shouldHideBanner = hideAdminBanner.includes(location.pathname);
+  
+  const shouldshowBanner = location.pathname.startsWith("/admin");
 
   async function handleLogoutCLick(e){
     e.preventDefault();
@@ -15,19 +15,20 @@ export default function Header( ){
   };  
 
     return(
-        <header className="hero bg-base-200 min-h-[33vh]">
-          {!shouldHideBanner && (
-            <div className="navbar bg-base-100 shadow-sm">
+      <>
+      {shouldshowBanner && (
+            <div className="navbar bg-base-100 shadow-sm justify-end gap-4 px-4 py-2">
               <p>Inloggad som administratör</p>
-              <ButtonSecondary text="Logga ut" onClick={handleLogoutCLick} type="button" />       
+              <ButtonLogout text="Logga ut" onClick={handleLogoutCLick} type="button" />       
             </div>
           )}
-
+        <header className="hero bg-base-200 min-h-[33vh]">          
         <div className="hero-content text-center">
           <h1 className="text-4xl md:text-6xl font-black">
             Oxalat- och näringskollen
           </h1>
         </div>
       </header>
+      </>
     )
 }
