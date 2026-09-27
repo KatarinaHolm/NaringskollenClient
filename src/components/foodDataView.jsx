@@ -6,7 +6,7 @@ export default function FoodDataView({
   foodData,  
 }) {
   return (
-    <>
+    <div className="mb-4">
       <h3>{title}</h3>
       <p><strong>Kategori:</strong> {foodData.category}</p>
 
@@ -37,6 +37,6 @@ export default function FoodDataView({
           </p>
         )         
       })}       
-    </>
+    </div>
   );
 }
