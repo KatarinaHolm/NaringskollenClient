@@ -52,9 +52,9 @@ export default function AdminPage() {
   }
 
   return (
-    <main>
-      <h2>Inloggad admin</h2>
-      {mode !== "create" && (
+    <main className="min-h-[67vh] max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4">
+      
+      {mode !== "create" && (       
         <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />
       )}
 

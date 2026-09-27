@@ -5,11 +5,11 @@ export default function InputLogin({type, placeholder, value, onChange, name, re
   
   return(
    <>
-   <label htmlFor={name} className="input">
+   <label htmlFor={name} className="input mb-4">
     <span className="sr-only">{placeholder}</span>
     {required && <span className="required">*</span>}
     <input 
-    className="grow" 
+    className="grow w-full max-w-lg" 
     id={name} 
     type={type} 
     placeholder={placeholder} 

@@ -18,7 +18,7 @@ export default function HomePage(){
     }
 
     return(
-        <main>
+        <main className="min-h-[67vh] max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4">
         <SearchFieldUser onSearchSucess={handleSearchSuccess}/>
         
         {isFoodCardVisible && (

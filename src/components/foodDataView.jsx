@@ -6,11 +6,11 @@ export default function FoodDataView({
   foodData,  
 }) {
   return (
-    <>
+    <div className="mb-4">
       <h3>{title}</h3>
       <p><strong>Kategori:</strong> {foodData.category}</p>
 
-      {!foodData.isSystem && (
+      {!foodData.isSystem &&  foodData.externalId && (
         <p><strong>Livsmedelsnummer hos Livsmedelsverket:</strong> {foodData.externalId}</p>
       )}
 
@@ -37,6 +37,6 @@ export default function FoodDataView({
           </p>
         )         
       })}       
-    </>
+    </div>
   );
 }

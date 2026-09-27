@@ -1,8 +1,8 @@
 
-export default function buttonSecondary({text, onClick, type, disabled, isLoading, loadingText}){
+export default function ButtonSecondary({text, onClick, type, disabled, isLoading, loadingText}){
 
     return(
-        <button className="btn btn-neutral mt-4 btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl" onClick={onClick} type={type} disabled={disabled || isLoading} >
+        <button className="btn btn-neutral btn-sm md:btn-md lg:btn-lg w-full max-w-lg mb-4" onClick={onClick} type={type} disabled={disabled || isLoading} >
         {isLoading ? loadingText: text}
         </button>
     );

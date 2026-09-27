@@ -7,20 +7,21 @@ export default function Footer(){
 
 
     return(
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
-    <aside className="grid-flow-col items-center">
-    {/* bild? */}
-        <p>Innehåller data från Livsmedelsverkets Livsmedelsdatabas (version [20260701]), licensierad under CC BY 4.0. Oxalatdata från Oxalosis & Hyperoxaluria Foundation, Harvard, Swan Urology, Sally Norton samt publicerade studier (Nguyễn & Savage 2013, Attalla m.fl. 2014 m.fl.). </p>
-    </aside>
+    <footer className=" bg-neutral text-neutral-content  p-4">
+        <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4 footer sm:footer-horizontal">                
+            <aside className="grid-flow-col items-center">
+            {/* bild? */}
+                <p>Innehåller data från Livsmedelsverkets Livsmedelsdatabas (version [20260701]), licensierad under CC BY 4.0. Oxalatdata från Oxalosis & Hyperoxaluria Foundation, Harvard, Swan Urology, Sally Norton samt publicerade studier (Nguyễn & Savage 2013, Attalla m.fl. 2014 m.fl.). </p>
+            </aside>
 
-    {!shouldHideLoginButton && (
-        <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-            <NavLink to= "/admin">
-                Admin
-            </NavLink>            
-        </nav>
-    )}
-
+            {!shouldHideLoginButton && (
+                <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+                    <NavLink to= "/admin">
+                        Admin
+                    </NavLink>            
+                </nav>
+            )}
+    </div>
     </footer>
     )
 }
