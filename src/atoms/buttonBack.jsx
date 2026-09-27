@@ -1,4 +1,4 @@
-export default function buttonSecondary({ onBackClick }) {
+export default function ButtonBack({ onBackClick }) {
   return (
     <button
       type="button"
