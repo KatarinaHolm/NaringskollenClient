@@ -11,7 +11,7 @@ export default function InputField({label, type, placeholder, value, onChange, n
     </label>    
     
     <input 
-    className="input" 
+    className="input w-full max-w-lg mb-4" 
     id={name} 
     type={type}
     min="0"

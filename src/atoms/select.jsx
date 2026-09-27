@@ -18,7 +18,7 @@ export default function Select({
         name={name}
         value={value}
         onChange={onSelectChange}
-        className="select"
+        className="select w-full max-w-lg mb-4"
         required= {required}
       >
         <option value="" disabled hidden>

@@ -7,7 +7,7 @@ export default function Card({ children, onCloseClick, onBackClick }) {
         <div className="card-actions justify-between">
           {onBackClick && <ButtonBack onBackClick={onBackClick} />}
 
-          <button className="btn btn-square btn-sm" onClick={onCloseClick}>
+          <button className="btn btn-square btn-sm ml-auto" onClick={onCloseClick}>
             <svg
               aria-label="Close"
               xmlns="http://www.w3.org/2000/svg"
