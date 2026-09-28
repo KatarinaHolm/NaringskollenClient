@@ -4,6 +4,7 @@ import { getById } from "../services/foodService";
 import { FoodContext } from "../context/FoodContext";
 import SearchSelect from "../atoms/searchAutoComplete";
 import ButtonPrimary from "../atoms/buttonPrimary";
+import CardSearch from "../atoms/cardSearch";
 
 export default function SearchFieldAdmin({ onSearchSucess }) {
   //States and objects
@@ -27,6 +28,9 @@ export default function SearchFieldAdmin({ onSearchSucess }) {
   //For getting complete data for the chosen food
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!selectedFood) {
+      return;
+    }
     try {
       const results = await getById(selectedFood);
       setFoodReferenceData(results);
@@ -38,18 +42,21 @@ export default function SearchFieldAdmin({ onSearchSucess }) {
   }
   return (
     <>
+    <CardSearch title="Sök livsmedelsdata">
       <form onSubmit={handleSubmit}>
         <SearchSelect
           value={searchQuery}
           onChange={(e) => {
             setShouldSearch(true);
+            setSelectedFood(null);
             setSearchQuery(e.target.value);
           }}
           results={searchResults}
           onSelect={onFoodSelect}
         />
-        <ButtonPrimary text="Sök livsmedel" type="submit" disabled={false} />
+        <ButtonPrimary text="Sök livsmedelsdata" type="submit" disabled={false} />
       </form>
+      </CardSearch>
     </>
   );
 }

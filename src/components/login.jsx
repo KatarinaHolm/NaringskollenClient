@@ -18,8 +18,8 @@ export default function Login(){
     };
 
     return(
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">Logga in</legend>
+        <fieldset className="fieldset bg-base-200/90  border-base-300 rounded-box max-w-lg border p-4 my-8">
+            <h2 className="card-title">Logga in</h2>
             <form onSubmit={handleLogin}>
                 <InputLogin type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
                 <InputLogin type="password" placeholder="Lösenord" value={password} onChange={(e) => setPassword(e.target.value)} name="password" required />   

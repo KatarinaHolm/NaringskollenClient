@@ -11,8 +11,8 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
 
   return (
     <div className="relative w-full max-w-lg">
-      <label className="input w-full my-4">
-        <span className="sr-only">Sök livsmedel</span>
+      <label className="input w-full mt-4">
+        <span className="sr-only">Sök och välj livsmedel</span>
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
          type="search" 
          name="searchAutoComplete"
          className="grow" 
-         placeholder="Sök livsmedel"
+         placeholder="Sök och välj livsmedel"
          required
          value ={value}
          onChange={onChange}

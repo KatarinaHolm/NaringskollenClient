@@ -7,7 +7,7 @@ export default function Footer(){
 
 
     return(
-    <footer className=" bg-neutral text-neutral-content  p-4">
+    <footer className="bg-base-300 text-base-content  p-4">
         <div className="max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4 footer sm:footer-horizontal">                
             <aside className="grid-flow-col items-center">
             {/* bild? */}
@@ -16,7 +16,7 @@ export default function Footer(){
 
             {!shouldHideLoginButton && (
                 <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-                    <NavLink to= "/admin">
+                    <NavLink to= "/admin" className="link link-hover">
                         Admin
                     </NavLink>            
                 </nav>

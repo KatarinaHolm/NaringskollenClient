@@ -2,7 +2,7 @@ import ButtonBack from "./buttonBack";
 
 export default function Card({ children, onCloseClick, onBackClick }) {
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card bg-base-100/90 backdrop-blur w-full max-w-lg shadow-sm my-8">
       <div className="card-body">
         <div className="card-actions justify-between">
           {onBackClick && <ButtonBack onBackClick={onBackClick} />}

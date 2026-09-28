@@ -6,6 +6,7 @@ import SearchSelect from "../atoms/searchAutoComplete";
 import QuantityInput from "../atoms/inputField";
 import SelectUnit from "../atoms/select";
 import ButtonPrimary from "../atoms/buttonPrimary";
+import CardSearch from "../atoms/cardSearch";
 
 
 export default function SearchFieldUser({onSearchSucess}) {
@@ -70,6 +71,9 @@ export default function SearchFieldUser({onSearchSucess}) {
   // Call for getting calculated nutrition
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!selectedFood) {
+      return;
+    }
     try {
       const results= await getCalculatedNutrition(selectedFood.id, quantityValue, unitValue);
       setCalculatedNutritionData(results);
@@ -84,34 +88,38 @@ export default function SearchFieldUser({onSearchSucess}) {
  
   return (
     <>
+    <CardSearch title="Sök näringsinnehåll">
     <form onSubmit={handleSubmit}>
       <SearchSelect
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+          setSelectedFood(null);}}
         results={searchResults}
         onSelect={onFoodSelect}
       />
       <QuantityInput 
         label="Mängd"
         type="Number"
-        placeholder="Mängd"
+        placeholder="Ange mängd"
         value={quantityValue}
         onChange={(e) => setQuantityValue(e.target.value)}
         name="quantity"
       />
       <SelectUnit 
         label="Enhet"
-        placeholder="Enhet"
+        placeholder="Välj enhet"
         name="unit"
         value={unitValue}
         onSelectChange={(e) => setUnitValue(e.target.value)}
         options={selectUnitOptions}
       />
       <ButtonPrimary
-            text="Sök livsmedel"      
+            text="Sök oxalater & näring"      
             type="submit"           
       />
     </form>
+    </CardSearch>
     </>
   );
 }
