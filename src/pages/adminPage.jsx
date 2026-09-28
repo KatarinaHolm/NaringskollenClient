@@ -26,6 +26,7 @@ export default function AdminPage() {
 
   function onFoodCardCloseClick() {
     setIsFoodCardVisible(false);
+    setFoodReferenceData(undefined);
   }
 
   function onCreateCardCloseClick() {
