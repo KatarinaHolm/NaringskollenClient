@@ -6,6 +6,7 @@ import SearchSelect from "../atoms/searchAutoComplete";
 import QuantityInput from "../atoms/inputField";
 import SelectUnit from "../atoms/select";
 import ButtonPrimary from "../atoms/buttonPrimary";
+import CardSearch from "../atoms/cardSearch";
 
 
 export default function SearchFieldUser({onSearchSucess}) {
@@ -84,6 +85,7 @@ export default function SearchFieldUser({onSearchSucess}) {
  
   return (
     <>
+    <CardSearch>
     <form onSubmit={handleSubmit}>
       <SearchSelect
         value={searchQuery}
@@ -112,6 +114,7 @@ export default function SearchFieldUser({onSearchSucess}) {
             type="submit"           
       />
     </form>
+    </CardSearch>
     </>
   );
 }

@@ -4,6 +4,7 @@ import { getById } from "../services/foodService";
 import { FoodContext } from "../context/FoodContext";
 import SearchSelect from "../atoms/searchAutoComplete";
 import ButtonPrimary from "../atoms/buttonPrimary";
+import CardSearch from "../atoms/cardSearch";
 
 export default function SearchFieldAdmin({ onSearchSucess }) {
   //States and objects
@@ -38,6 +39,7 @@ export default function SearchFieldAdmin({ onSearchSucess }) {
   }
   return (
     <>
+    <CardSearch>
       <form onSubmit={handleSubmit}>
         <SearchSelect
           value={searchQuery}
@@ -50,6 +52,7 @@ export default function SearchFieldAdmin({ onSearchSucess }) {
         />
         <ButtonPrimary text="Sök livsmedel" type="submit" disabled={false} />
       </form>
+      </CardSearch>
     </>
   );
 }

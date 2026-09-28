@@ -52,7 +52,7 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-[67vh] max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4">
+    <main className="min-h-[67vh] flex flex-col items-center max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto px-4">
       
       {mode !== "create" && (       
         <SearchFieldAdmin onSearchSucess={handleSearchSuccess} />

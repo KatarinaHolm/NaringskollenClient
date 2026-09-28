@@ -8,7 +8,7 @@ export default function Select({
   required
 }) {
   return (
-    <fieldset className="fieldset">
+    <fieldset className="fieldset mt-2">
       <label htmlFor="select" className="label">
         {label}
         {required && <span className="required"> *</span>}
@@ -18,7 +18,7 @@ export default function Select({
         name={name}
         value={value}
         onChange={onSelectChange}
-        className="select w-full max-w-lg mb-4"
+        className="select w-full max-w-lg"
         required= {required}
       >
         <option value="" disabled hidden>

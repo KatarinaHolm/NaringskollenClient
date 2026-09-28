@@ -11,7 +11,7 @@ export default function SearchAutoComplete({value, onChange, results, onSelect})
 
   return (
     <div className="relative w-full max-w-lg">
-      <label className="input w-full my-4">
+      <label className="input w-full mt-4">
         <span className="sr-only">Sök livsmedel</span>
         <svg
           className="h-[1em] opacity-50"

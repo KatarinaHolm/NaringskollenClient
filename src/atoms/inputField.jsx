@@ -4,14 +4,14 @@ export default function InputField({label, type, placeholder, value, onChange, n
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(
-   <fieldset className="fieldset">
+   <fieldset className="fieldset mt-2">
    <label htmlFor={name} className="label">
     {label}
     {required && <span className="required"> *</span>}
     </label>    
     
     <input 
-    className="input w-full max-w-lg mb-4" 
+    className="input w-full max-w-lg" 
     id={name} 
     type={type}
     min="0"

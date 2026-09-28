@@ -14,6 +14,10 @@ function App() {
 
   return (
     <>
+    <div 
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/images/bg-image.webp')" }}
+    >
     <Header />
     <FoodProvider>
       <Routes>
@@ -23,6 +27,7 @@ function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>    
     </FoodProvider>
+    </div>
     <Footer />
     </>
   )
