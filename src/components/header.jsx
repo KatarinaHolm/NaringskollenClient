@@ -24,7 +24,7 @@ export default function Header( ){
           )}
         <header className="hero bg-base-100/70 backdrop-blur-xs min-h-[33vh]">          
         <div className="hero-content text-center">
-          <h1 className="text-4xl md:text-6xl font-black">
+          <h1 className="font-lucky text-4xl md:text-6xl font-black">
             Oxalat- och näringskollen
           </h1>
         </div>
