@@ -60,10 +60,10 @@ export default function EditFood({
 
   return (
     <>
-      <h3>
+      <h2 className="card-title">
         {title}
         {currentData.name}
-      </h3>
+      </h2>
       <form onSubmit={handleSubmit}>       
         <Select
           label="Kategori"
@@ -84,7 +84,7 @@ export default function EditFood({
           />
         )}
 
-        <h4>Måttenheter - vikt per enhet</h4>
+        <h3 className="text-base mt-4">Måttenheter - vikt per enhet</h3>
         {currentData.foodMeasurements.length > 0 ? (
           currentData.foodMeasurements?.map((measurement, index) => {
             // Setting unit to numeric value
@@ -115,14 +115,14 @@ export default function EditFood({
             );
           })
         ) : (
-          <p>Inga måttenheter finns sparade.</p>
+          <p className="mt-2">Inga måttenheter finns sparade.</p>
         )}
 
-        <h4>{subtitle}</h4>
+        <h3 className="text-base mt-4 mb-2">{subtitle}</h3>
         {!foodData.isSystem && (
           <div>
             <p
-              className="fieldset-label text-base-content/70 text-xs mt-1"
+              className="fieldset-label text-base-content/70 text-xs italic"
               aria-live="polite"
             >
               Data från Livsmedelsdatabasen går inte att ändra.

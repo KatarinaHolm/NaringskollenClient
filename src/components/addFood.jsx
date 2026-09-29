@@ -56,7 +56,7 @@ export default function AddFood({
     <>
       {mode === "create" && (
         <>
-          <h3>{title}</h3>
+          <h2 className="card-title">{title}</h2>
           <form onSubmit={handleSubmit}>
             <InputField
               name="name"
@@ -77,7 +77,7 @@ export default function AddFood({
               required
             />
 
-            <h4>{subtitle}</h4>
+            <h3 className="text-base mt-4">{subtitle}</h3>
             {fields.map((field) => {
               let value = currentData?.[field.key];
 
@@ -95,7 +95,7 @@ export default function AddFood({
               );
             })}
 
-            <h4>Måttenheter - vikt per enhet</h4>
+            <h3 className="text-base mt-4">Måttenheter - vikt per enhet</h3>
             <div>
               <InputField
                 name="grams"

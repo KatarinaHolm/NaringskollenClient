@@ -1,6 +1,6 @@
 
 export const referenceFields = [
-    { key: "oxalate", label: "Oxalat (mg)", type: "number" },
+    { key: "oxalate", label: "Oxalater (mg)", type: "number" },
     { key: "kcal", label: "Kalorier (kcal)", type: "number", disabled: true},
     { key: "fat", label: "Fett (g)", type: "number", disabled: true },
     { key: "protein", label: "Protein (g)", type: "number", disabled: true },
@@ -67,7 +67,7 @@ export const createFood = {
 };
 
 export const createFields = [  
-  { key: "oxalate", label: "Oxalat (mg)", type: "number" },
+  { key: "oxalate", label: "Oxalater (mg)", type: "number" },
   { key: "kcal", label: "Kalorier (kcal)", type: "number", required: true },
   { key: "fat", label: "Fett (g)", type: "number", required: true },
   { key: "protein", label: "Protein (g)", type: "number", required: true },

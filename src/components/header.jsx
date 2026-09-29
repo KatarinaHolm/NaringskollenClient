@@ -16,19 +16,22 @@ export default function Header( ){
 
     return(
       <>
+      <div className="min-h-[33vh] flex flex-col">
       {shouldshowBanner && (
-            <div className="navbar bg-base-200 shadow-sm justify-end gap-4 px-4">
+            <div className="navbar bg-base-200 shadow-sm justify-end gap-4 px-4 flex-none">
               <p>Inloggad som administratör</p>
               <ButtonLogout text="Logga ut" onClick={handleLogoutCLick} type="button" />       
             </div>
           )}
-        <header className="hero bg-base-100/70 backdrop-blur-xs min-h-[33vh]">          
+        <header className="hero flex-1 min-h-0 bg-base-100/70 backdrop-blur-xs">          
+        
         <div className="hero-content text-center">
           <h1 className="font-lucky text-4xl md:text-6xl font-black">
             Oxalat- och näringskollen
           </h1>
         </div>
       </header>
+      </div>
       </>
     )
 }
