@@ -9,7 +9,7 @@ export default function NotFoundPage(){
        
         <p>Gå tillbaka till <NavLink to= "/" className="link link-hover">
                 startsidan
-            </NavLink>  </p>        
+            </NavLink>.</p>        
         </CardSearch>
         </main>
     );

@@ -7,25 +7,25 @@ export default function FoodDataView({
 }) {
   return (
     <div className="mb-4">
-      <h3>{title}</h3>
-      <p><strong>Kategori:</strong> {foodData.category}</p>
+      <h2 className="card-title mb-2">{title}</h2>
+      <p className="italic"><strong>Kategori:</strong> {foodData.category}</p>
 
       {!foodData.isSystem &&  foodData.externalId && (
-        <p><strong>Livsmedelsnummer hos Livsmedelsverket:</strong> {foodData.externalId}</p>
+        <p className="italic"><strong>Livsmedelsnummer hos Livsmedelsverket:</strong> {foodData.externalId}</p>
       )}
 
       {foodData.foodMeasurements && foodData.foodMeasurements.length > 0 && (
          <div>
-            <h4>Måttenheter - vikt per enhet</h4>
+            <h3 className="text-base mt-4 mb-2">Måttenheter - vikt per enhet</h3>
             <ul>
               {foodData.foodMeasurements.map((item) => (                
-                <li key={item.id}>1 {item.unit}: {item.grams} gram</li>
+                <li key={item.id}><strong>1 {item.unit}:</strong> {item.grams} gram</li>
               ))}
             </ul>
           </div>
       )}
       
-      <h4>{subtitle}</h4>
+      <h3 className="text-base mt-4 mb-2">{subtitle}</h3>
       {fields.map((field) => {
         let value = foodData?.[field.key];
         if (value === null || value === undefined ) return;
