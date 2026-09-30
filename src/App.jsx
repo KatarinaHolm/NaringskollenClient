@@ -16,7 +16,7 @@ function App() {
     <>
     <div 
       className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{ backgroundImage: "url('/images/bg-image.webp')" }}
+      style={{ backgroundImage: "url('/bg-image.webp')"}}
     >
     <Header />
     <FoodProvider>
