@@ -5,16 +5,17 @@ export default function Select({
   value,
   onSelectChange,
   options,
-  required
+  required,
+  id = name
 }) {
   return (
     <fieldset className="fieldset mt-2">
-      <label htmlFor="select" className="label">
+      <label htmlFor={id} className="label">
         {label}
         {required && <span className="required"> *</span>}
       </label>
       <select
-        id="select"
+        id={id}
         name={name}
         value={value}
         onChange={onSelectChange}

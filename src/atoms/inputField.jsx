@@ -1,18 +1,18 @@
 import { useInputValidation } from "../hooks/useInputValidation"
 
-export default function InputField({label, type, placeholder, value, onChange, name, required, disabled=false}){
+export default function InputField({label, type, placeholder, value, onChange, name, id = name, required, disabled=false}){
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(
    <fieldset className="fieldset mt-2">
-   <label htmlFor={name} className="label">
+   <label htmlFor={id} className="label">
     {label}
     {required && <span className="required"> *</span>}
     </label>    
     
     <input 
     className="input w-full max-w-lg" 
-    id={name} 
+    id={id} 
     type={type}
     min="0"
     step="0.01"
