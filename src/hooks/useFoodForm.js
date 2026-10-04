@@ -1,7 +1,15 @@
 import { useState } from "react";
 
-export function useFoodForm(intialData){
-      const [currentData, setCurrentData] = useState(intialData);
+export function useFoodForm(initialData){
+      const [currentData, setCurrentData] = useState(() => ({
+        ...initialData,
+        foodMeasurements: (initialData.foodMeasurements ?? []).map((measurement, index) => ({
+          ...measurement,
+          _rowKey: measurement.id != null
+            ? `saved-${measurement.id}`
+            : `initial-${index}`,
+        })),
+      }));
     
       //Input fields
       function handleChange({ target }) {
@@ -36,10 +44,36 @@ export function useFoodForm(intialData){
           ),
         }));
       } 
+
+      function addMeasurement() {
+        const newMeasurement = {
+          grams: "",
+          unit: "",
+          _rowKey: `new-${crypto.randomUUID()}`,
+        };
+
+        setCurrentData((prev) => ({
+          ...prev,
+          foodMeasurements: [
+            ...prev.foodMeasurements,
+            newMeasurement,
+          ],
+        }));
+      }
+
+      function removeMeasurement(index) {
+        setCurrentData((prev) => ({
+          ...prev,
+          foodMeasurements: prev.foodMeasurements.filter((_, rowIndex) => rowIndex !== index),
+        }));
+      }
+
       return{
         currentData,
         setCurrentData,
         handleChange,
-        handleMeasurementChange
+        handleMeasurementChange,
+        addMeasurement,
+        removeMeasurement
       };
 }

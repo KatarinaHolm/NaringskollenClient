@@ -6,6 +6,7 @@ import InputField from "../atoms/inputField";
 import Select from "../atoms/select";
 import ButtonSecondary from "../atoms/buttonSecondary";
 import FoodDataView from "./foodDataView";
+import FoodMeasurementRow from "./foodMeasurementRow";
 
 export default function AddFood({
   title,
@@ -13,44 +14,54 @@ export default function AddFood({
   fields,
   categories,
   specialUnitOptions,
-  initialFoodData,  
+  initialFoodData,
 }) {
   const { setFoodReferenceData, foodReferenceData } = useContext(FoodContext);
-  const { currentData, handleChange, handleMeasurementChange } =
-    useFoodForm(initialFoodData);
-  const [mode, setMode] = useState("create"); // create || viewCreated
+  const {
+    currentData,
+    handleChange,
+    handleMeasurementChange,
+    addMeasurement,
+    removeMeasurement,
+  } = useFoodForm(initialFoodData);
+  const [mode, setMode] = useState("create");
+  const [formError, setFormError] = useState("");
 
-   // if time: add check that name doesnt exist in database.
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setFormError("");
 
-  async function handleSubmit(e) {
-    e.preventDefault();    
-   
+    const units = currentData.foodMeasurements.map((measurement) => measurement.unit);
+    if (new Set(units).size !== units.length) {
+      setFormError("Samma måttenhet får bara läggas till en gång.");
+      return;
+    }
+
     try {
-        //Transforming empty string to null to prevent database error.
-      const normalizedData = JSON.parse(
-        JSON.stringify(currentData, (_, value) =>
-          value === "" ? null : value,
-        ),
+      const foodFields = Object.fromEntries(
+        Object.entries(currentData).filter(([key]) => key !== "foodMeasurements"),
+      );
+      const normalizedFoodFields = JSON.parse(
+        JSON.stringify(foodFields, (_, value) => value === "" ? null : value),
       );
 
-      //check if unit or grams is null, then update foodmeasurement to empty array
-      const measurement = normalizedData.foodMeasurements[0];
       const foodToCreate = {
-        ...normalizedData,
-        foodMeasurements:
-          measurement.grams === null || measurement.unit === null
-            ? []
-            : normalizedData.foodMeasurements,
+        ...normalizedFoodFields,
+        foodMeasurements: currentData.foodMeasurements.map((measurement) => ({
+          unit: measurement.unit,
+          grams: Number(measurement.grams),
+        })),
       };
 
       const results = await createFood(foodToCreate);
       setFoodReferenceData(results);
       setMode("viewCreated");
-
     } catch (error) {
-      console.log("Error updating nutrition data:", error);
+      setFormError(error.response?.data?.detail || "Det gick inte att spara livsmedlet.");
     }
   }
+
+  const usedUnits = currentData.foodMeasurements.map((measurement) => measurement.unit);
 
   return (
     <>
@@ -78,42 +89,40 @@ export default function AddFood({
             />
 
             <h3 className="text-base mt-4">{subtitle}</h3>
-            {fields.map((field) => {
-              let value = currentData?.[field.key];
-
-              return (
-                <InputField                
-                  name={field.key}
-                  key={field.key}                    
-                  label={field.label}
-                  type={field.type}
-                  placeholder={field.label}
-                  value={value}
-                  onChange={handleChange}
-                  required={field.required}
-                />
-              );
-            })}
-
-            <h3 className="text-base mt-4">Måttenheter - vikt per enhet</h3>
-            <div>
+            {fields.map((field) => (
               <InputField
-                name="grams"
-                label="Vikt (g)"
-                type="number"
-                placeholder="Vikt (g)"
-                value={currentData.foodMeasurements[0].grams}
-                onChange={(e) => handleMeasurementChange(0, e)}
+                name={field.key}
+                key={field.key}
+                label={field.label}
+                type={field.type}
+                placeholder={field.label}
+                value={currentData[field.key]}
+                onChange={handleChange}
+                required={field.required}
               />
-              <Select
-                label="Enhet"
-                placeholder="Enhet"
-                name="unit"
-                value={currentData.foodMeasurements[0].unit}
-                onSelectChange={(e) => handleMeasurementChange(0, e)}
+            ))}
+
+            <h3 className="text-base mt-4">Måttenheter – vikt per enhet</h3>
+            {currentData.foodMeasurements.map((measurement, index) => (
+              <FoodMeasurementRow
+                key={measurement._rowKey}
+                measurement={measurement}
+                index={index}
                 options={specialUnitOptions}
+                usedUnits={usedUnits}
+                onChange={handleMeasurementChange}
+                onRemove={removeMeasurement}
               />
-            </div>
+            ))}
+            <button
+              className="btn btn-outline btn-sm md:btn-md mt-3 mb-2"
+              type="button"
+              onClick={addMeasurement}
+            >
+              Lägg till måttenhet
+            </button>
+
+            {formError && <p className="mt-3 text-error" role="alert">{formError}</p>}
             <ButtonSecondary text="Lägg till livsmedel" type="submit" />
           </form>
         </>

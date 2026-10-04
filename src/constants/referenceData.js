@@ -58,12 +58,7 @@ export const createFood = {
   saturatedFat: "",
   monounsaturatedFat: "",
   polyunsaturatedFat: "",
-  foodMeasurements: [
-    {
-    grams: "",
-    unit: ""
-  }
-  ],
+  foodMeasurements: [],
 };
 
 export const createFields = [  
