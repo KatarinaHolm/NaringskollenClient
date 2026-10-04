@@ -23,6 +23,7 @@ export default function SearchFieldUser({onSearchSucess}) {
 
   // QuantityInput
   const [quantityValue, setQuantityValue] = useState("");
+  const [formError, setFormError] = useState("");
 
   //SelectUnit
   const baseUnitOptions = [
@@ -71,9 +72,10 @@ export default function SearchFieldUser({onSearchSucess}) {
   // Call for getting calculated nutrition
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!selectedFood) {
+    if (!selectedFood?.id) {
       return;
     }
+    setFormError("");
     try {
       const results= await getCalculatedNutrition(selectedFood.id, quantityValue, unitValue);
       setCalculatedNutritionData(results);
@@ -82,7 +84,7 @@ export default function SearchFieldUser({onSearchSucess}) {
       setUnitValue("");
       onSearchSucess();
     } catch (error) {
-      console.log("Error fetching nutrition data:", error);
+      setFormError(error.response?.data?.detail || "Det gick inte att beräkna näringsinnehållet.");
     }
   }
  
@@ -100,18 +102,29 @@ export default function SearchFieldUser({onSearchSucess}) {
       />
       <QuantityInput 
         label="Mängd"
-        type="Number"
+        type="number"
         placeholder="Ange mängd"
         value={quantityValue}
-        onChange={(e) => setQuantityValue(e.target.value)}
+        onChange={(e) => {
+          setQuantityValue(e.target.value);
+          setFormError("");
+        }}
         name="quantity"
+        min={0.01}
+        max={1000000}
+        step={0.01}
+        required
       />
+      {formError && <p className="mt-3 text-error" role="alert">{formError}</p>}
       <SelectUnit 
         label="Enhet"
         placeholder="Välj enhet"
         name="unit"
         value={unitValue}
-        onSelectChange={(e) => setUnitValue(e.target.value)}
+        onSelectChange={(e) => {
+          setUnitValue(e.target.value);
+          setFormError("");
+        }}
         options={selectUnitOptions}
       />
       <ButtonPrimary
