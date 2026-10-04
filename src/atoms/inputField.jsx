@@ -1,6 +1,6 @@
 import { useInputValidation } from "../hooks/useInputValidation"
 
-export default function InputField({label, type, placeholder, value, onChange, name, id = name, required, disabled=false}){
+export default function InputField({label, type, placeholder, value, onChange, name, id = name, required, disabled=false, min=0, max, step="0.01"}){
   const {inputError, handleFocus, handleBlur, handleInvalid} = useInputValidation();
   
   return(
@@ -14,8 +14,9 @@ export default function InputField({label, type, placeholder, value, onChange, n
     className="input w-full max-w-lg" 
     id={id} 
     type={type}
-    min="0"
-    step="0.01"
+    min={min}
+    max={max}
+    step={step}
     placeholder={placeholder} 
     value={value}
     onChange={onChange} 
