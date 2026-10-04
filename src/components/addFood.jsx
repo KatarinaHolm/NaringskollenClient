@@ -115,7 +115,7 @@ export default function AddFood({
               />
             ))}
             <button
-              className="btn btn-outline btn-sm md:btn-md mt-3"
+              className="btn btn-outline btn-sm md:btn-md mt-3 mb-2"
               type="button"
               onClick={addMeasurement}
             >

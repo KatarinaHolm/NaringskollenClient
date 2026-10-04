@@ -109,7 +109,7 @@ export default function EditFood({
           <p className="mt-2">Inga måttenheter finns sparade.</p>
         )}
         <button
-          className="btn btn-outline btn-sm md:btn-md mt-3"
+          className="btn btn-outline btn-sm md:btn-md mt-3 mb-2"
           type="button"
           onClick={addMeasurement}
         >

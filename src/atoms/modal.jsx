@@ -14,6 +14,7 @@ export default function Modal({title, text, openModalButtonText, showConfirmButt
       <ButtonSecondary    
         text={openModalButtonText}    
         onClick={() => dialogRef.current.showModal()}
+        className="text-error"
       />    
       <dialog ref={dialogRef} className="modal">
         <div className="modal-box">
@@ -43,6 +44,7 @@ export default function Modal({title, text, openModalButtonText, showConfirmButt
                 text={confirmButtonText}
                 onClick={handleConfirm}
                 type="button"
+                className="text-error"
                 />
           )}
         </div>

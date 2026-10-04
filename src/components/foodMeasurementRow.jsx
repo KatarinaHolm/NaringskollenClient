@@ -36,8 +36,9 @@ export default function FoodMeasurementRow({
         options={availableOptions}
         required
       />
+      
       <button
-        className="btn btn-ghost btn-sm mt-2 text-error"
+        className="btn btn-xs md:btn-sm mt-2 text-error"
         type="button"
         onClick={() => onRemove(index)}
         aria-label={`Ta bort omvandling ${measurement.unit || index + 1}`}
